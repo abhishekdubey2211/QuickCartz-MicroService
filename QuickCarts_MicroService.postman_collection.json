@@ -1,0 +1,653 @@
+{
+	"info": {
+		"_postman_id": "1d57da60-090f-41ca-8640-8f2b6530abae",
+		"name": "QuickCarts_MicroService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28031818",
+		"_collection_link": "https://gold-astronaut-706993.postman.co/workspace/My-Workspace~6d25a4b9-1438-450b-811b-58f1a81711fd/collection/28031818-1d57da60-090f-41ca-8640-8f2b6530abae?action=share&source=collection_link&creator=28031818"
+	},
+	"item": [
+		{
+			"name": "USER-SERVICE",
+			"item": [
+				{
+					"name": "addUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n\t  \"firstName\": \"Abhishek\",\r\n\t  \"userName\": \"Dubey\",\r\n\t  \"emailAddress\": \"abdusbey433@gmail.com\",\r\n\t  \"contactNumber\": \"8850014998\",\r\n\t  \"designation\":\"Java Develper\",\r\n\t  \"password\":\"abhi@1234\",\r\n\t  \"confirmPassword\":\"abhi@1234\",\r\n\t  \"roles\":[\"ADMIN\",\"USER\",\"SUPERADMIN\"],\r\n\t  \"profileImage\": \"https://abhishek.com/abhismart.png\",\r\n\t  \"dateOfBirth\": \"2002-09-22\",\r\n\t  \"residentialAddress\": [\r\n\t    {\r\n\t      \"address1\": \"Pushpanjali CHS Mhada\",\r\n\t      \"address2\": \"Colony Vashinaka Chembur\",\r\n\t      \"village\": \"Mahul Village\",\r\n\t      \"state\": \"Maharastra\",\r\n\t      \"city\": \"Mumbai\",\r\n\t      \"pincode\": \"400074\",\r\n\t      \"isPrimary\": 1\r\n\t    },\r\n\t     {\r\n\t      \"address1\": \"123 Main Street\",\r\n\t      \"address2\": \"Apt 4B\",\r\n\t      \"village\": \"Green Village\",\r\n\t      \"state\": \"California\",\r\n\t      \"city\": \"Los Angeles\",\r\n\t      \"pincode\": \"400075\",\r\n\t      \"isPrimary\": 0\r\n\t    }\r\n\t  ],\r\n\t  \"userParameterDetails\": [\r\n\t    {\r\n\t      \"parameterId\": 10024,\r\n\t      \"srNo\": 1,\r\n\t      \"value\": \"English\",\r\n\t      \"description\": \"User Selected Language\"\r\n\t    },\r\n\t    {\r\n\t      \"parameterId\": 10025,\r\n\t      \"srNo\": 1,\r\n\t      \"value\": \"14526\",\r\n\t      \"description\": \"User CartId\"\r\n\t    }\r\n\t  ]\r\n\t}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8085/api/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserDetails",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8085/api/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"userId\":1,\r\n\t  \"firstName\": \"Abhishek Dinesh Kumar\",\r\n\t  \"userName\": \"Dubey\",\r\n\t  \"emailAddress\": \"abdubey433@gmail.com\",\r\n\t  \"contactNumber\": \"8850014998\",\r\n\t  \"designation\":\"Java Develper\",\r\n\t  \"password\":\"abhi@12346\",\r\n\t  \"confirmPassword\":\"abhi@12346\",\r\n\t  \"roles\":[\"ADMIN\"],\r\n\t  \"profileImage\": \"https://abhishek/abhismart.png\",\r\n\t  \"dateOfBirth\": \"2002-09-18\",\r\n\t  \"residentialAddress\": [\r\n\t    {\r\n\t      \"address1\": \"Pushpanjali CHS Mhada\",\r\n\t      \"address2\": \"Colony Vashinaka Chembur\",\r\n\t      \"village\": \"Mahul Village\",\r\n\t      \"state\": \"Maharastra\",\r\n\t      \"city\": \"Mumbai\",\r\n\t      \"pincode\": \"400074\",\r\n\t      \"isPrimary\": 1\r\n\t    },\r\n\t     {\r\n\t      \"address1\": \"123 Main Street\",\r\n\t      \"address2\": \"Apt 4B\",\r\n\t      \"village\": \"Green Village\",\r\n\t      \"state\": \"California\",\r\n\t      \"city\": \"Los Angeles\",\r\n\t      \"pincode\": \"400075\",\r\n\t      \"isPrimary\": 0\r\n\t    }\r\n\t  ],\r\n\t  \"userParameterDetails\": [\r\n\t    {\r\n\t      \"parameterId\": 10024,\r\n\t      \"srNo\": 1,\r\n\t      \"value\": \"English\",\r\n\t      \"description\": \"User Selected Language\"\r\n\t    },\r\n\t    {\r\n\t      \"parameterId\": 10025,\r\n\t      \"srNo\": 1,\r\n\t      \"value\": \"14526\",\r\n\t      \"description\": \"User CartId\"\r\n\t    }\r\n\t  ]\r\n\t}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8085/api/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://USER-SERVICE/api/user/getall_users",
+							"protocol": "http",
+							"host": [
+								"USER-SERVICE"
+							],
+							"path": [
+								"api",
+								"user",
+								"getall_users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addAddress",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t      \"address1\": \"Pushpanjali CHS Mhada\",\r\n\t      \"address2\": \"Colony Vashinaka Chembur\",\r\n\t      \"village\": \"Mahul Village\",\r\n\t      \"state\": \"Maharastra\",\r\n\t      \"city\": \"Mumbai\",\r\n\t      \"pincode\": \"400074\",\r\n\t      \"isPrimary\": 1\r\n\t    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/api/address/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"address",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAddressById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n            \"addressId\": 3,\r\n            \"address1\": \"Pushpanjali CHS Mhada\",\r\n            \"address2\": \"Colony Vashinaka Chembur\",\r\n            \"village\": \"Mahul Village\",\r\n            \"state\": \"Maharastra\",\r\n            \"city\": \"Mumbai\",\r\n            \"pincode\": \"400074\",\r\n            \"isPrimary\": 0\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/api/address/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"address",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAddressById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8086/api/address/user/2/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"address",
+								"user",
+								"2",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAddresslistByUserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8086/api/address/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"address",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PRODUCT-SERVICE",
+			"item": [
+				{
+					"name": "addProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"productName\": \"Samsung Galaxy S23\",\r\n  \"brandName\": \"Samsung\",\r\n  \"categoryName\": \"Smartphones\",\r\n  \"productModel\": \"S23 Ultra\",\r\n  \"currentDiscount\": 20.5,\r\n  \"marketPrice\": 10000.00,\r\n  \"productQuantity\": 25,\r\n  \"description\": \"Flagship smartphone with advanced features.\",\r\n  \"images\": [\r\n    {\r\n      \"imageUrl\": \"https://example.com/images/s23-front.jpg\"\r\n    },\r\n    {\r\n      \"imageUrl\": \"https://example.com/images/s23-back.jpg\"\r\n    }\r\n  ],\r\n  \"productspecification\": [\r\n    {\r\n      \"fieldId\": 1,\r\n      \"srNo\": 1,\r\n      \"fieldName\": \"Display Size\",\r\n      \"fieldValue\": \"6.8 inches\"\r\n    },\r\n    {\r\n      \"fieldId\": 2,\r\n      \"srNo\": 2,\r\n      \"fieldName\": \"Battery Capacity\",\r\n      \"fieldValue\": \"5000mAh\"\r\n    },\r\n    {\r\n      \"fieldId\": 3,\r\n      \"srNo\": 3,\r\n      \"fieldName\": \"Processor\",\r\n      \"fieldValue\": \"Snapdragon 8 Gen 2\"\r\n    }\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/api/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProductById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8086/api/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProduct",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"productId\": 1,\r\n            \"productName\": \"Samsung Galaxy S23\",\r\n            \"brandName\": \"Samsung\",\r\n            \"categoryName\": \"Smartphones\",\r\n            \"productModel\": \"S23 Ultra\",\r\n            \"currentDiscount\": 20.5,\r\n            \"marketPrice\": 10000.0,\r\n            \"price\": 7950.0,\r\n            \"productQuantity\": 25,\r\n            \"description\": \"Flagship smartphone with advanced features.\",\r\n            \"productStatus\": \"IN-STOCK\",\r\n            \"images\": [\r\n                {\r\n                    \"imageUrl\": \"https://example.com/images/s23-front.jpg\"\r\n                },\r\n                {\r\n                    \"imageUrl\": \"https://example.com/images/s23-back.jpg\"\r\n                }\r\n            ],\r\n            \"productspecification\": [\r\n                {\r\n                    \"fieldId\": 1,\r\n                    \"srNo\": 1,\r\n                    \"fieldName\": \"Display Size\",\r\n                    \"fieldValue\": \"6.8 inches\"\r\n                },\r\n                {\r\n                    \"fieldId\": 2,\r\n                    \"srNo\": 2,\r\n                    \"fieldName\": \"Battery Capacity\",\r\n                    \"fieldValue\": \"5000mAh\"\r\n                },\r\n                {\r\n                    \"fieldId\": 3,\r\n                    \"srNo\": 3,\r\n                    \"fieldName\": \"Processor\",\r\n                    \"fieldValue\": \"Snapdragon 8 Gen 2\"\r\n                }\r\n            ]\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/api/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DefaultPaginated",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8086/api/product/paginated",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"product",
+								"paginated"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getInstockProduct",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8086/api/product/in-stock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"product",
+								"in-stock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OUTOFF-STOCKS Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8086/api/product/out-of-stock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"product",
+								"out-of-stock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProductsByCategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8086/api/product/category/Smartphones",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"product",
+								"category",
+								"Smartphones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProductsByBrand",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8086/api/product/brand/Samsung",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"product",
+								"brand",
+								"Samsung"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProductById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8086/api/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8086/api/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProductQuantity",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8086/api/product/1/quantity/-10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"product",
+								"1",
+								"quantity",
+								"-10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProductSummary",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8086/api/product/summary",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"product",
+								"summary"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProductCustomFilter",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sortBy\": \"name\",\r\n    \"sortDir\": \"asc\",\r\n    \"filterCriteriaList\": [\r\n        {\r\n            \"fieldName\": \"brand\",\r\n            \"operation\": \"like\",\r\n            \"value\": \"Sam\",\r\n            \"conditionType\": \"OR\"\r\n        },\r\n        {\r\n            \"fieldName\": \"discount\",\r\n            \"operation\": \">\",\r\n            \"value\": 10,\r\n            \"conditionType\": \"AND\"\r\n        }\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/api/product/add/filter",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"product",
+								"add",
+								"filter"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ORDER-SERVICE",
+			"item": [
+				{
+					"name": "PlaceOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderDetails\": [\r\n        {\r\n            \"productId\": 1,\r\n            \"quantity\": 16\r\n        },\r\n        {\r\n            \"productId\": 2,\r\n            \"quantity\": 16\r\n        }\r\n  ],\r\n  \"paymentMode\": \"Credit Card\",\r\n  \"isPaymentDone\": 1,\r\n  \"isdelevered\": \"No\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8087/api/order/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8087",
+							"path": [
+								"api",
+								"order",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrderByOrderId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8087/api/order/details/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8087",
+							"path": [
+								"api",
+								"order",
+								"details",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrderByUserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8087/api/order/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8087",
+							"path": [
+								"api",
+								"order",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CancellOrderByOrderId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8087/api/order/cancel/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8087",
+							"path": [
+								"api",
+								"order",
+								"cancel",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CancelSingleProductFromOrder",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8087/api/order/cancel_item/3/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8087",
+							"path": [
+								"api",
+								"order",
+								"cancel_item",
+								"3",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
