@@ -1,38 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.2</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>3.4.0</version>
 	</parent>
 	<groupId>com.shopify.cartservice</groupId>
 	<artifactId>CartService</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>CartService</name>
 	<description>Shopify MicroService -  CART-SERVICE</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
+	
 	<properties>
+		<image.name>path/to/splashscreen-image.png</image.name>
+		<developer.name>Abhishek Dubey</developer.name>
+		<developer.email>abdubey42@gmail.com</developer.email>
+		<developer.role>Lead Developer</developer.role>
+		<project.url>http://www.QuickcartzShoppingportal.com</project.url>
+		<organization.name>Avhan Technologies</organization.name>
+		<organization.url>http://www.QuickcartzShoppingportal.com</organization.url>
+		<source.repository>
+			https://github.com/AbhishekDubey/QuickcartzShoppingportal</source.repository>
+		<build.tool>Apache Maven</build.tool>
 		<java.version>21</java.version>
+		<project.version>${project.version}</project.version>
+		<spring-cloud.version>2024.0.0</spring-cloud.version>
+
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+			<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -64,31 +70,61 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</path>
-					</annotationProcessorPaths>
-				</configuration>
-			</plugin>
+			<!-- Spring Boot Maven Plugin -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<!-- Build Helper Plugin to Add Timestamp -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>timestamp</id>
+						<goals>
+							<goal>timestamp-property</goal>
+						</goals>
+						<configuration>
+							<name>build.timestamp</name> <!-- Property name -->
+							<pattern>yyyy-MM-dd HH:mm:ss</pattern> <!-- Timestamp
+							format -->
+							<timeZone>Asia/Kolkata</timeZone> <!-- Set your local
+							time zone -->
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Maven WAR Plugin to Modify the Manifest -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
+					<archive>
+						<manifestEntries>
+							<Built-By>${developer.name}</Built-By>
+							<Built-Date>${build.timestamp}</Built-Date> <!--
+							Store the build timestamp -->
+							<Project-Name>${project.name}</Project-Name>
+							<Project-Description>${project.description}</Project-Description>
+							<Project-URL>${project.url}</Project-URL>
+							<Project-Version>${project.version}</Project-Version>
+							<Organization-Name>${organization.name}</Organization-Name>
+							<Organization-URL>${organization.url}</Organization-URL>
+							<Developer-Name>${developer.name}</Developer-Name>
+							<Developer-Email>${developer.email}</Developer-Email>
+							<Developer-Role>${developer.role}</Developer-Role>
+							<Source-Repository>${source.repository}</Source-Repository>
+							<Build-Tool>${build.tool}</Build-Tool>
+							<Java-Version>${java.version}</Java-Version>
+						</manifestEntries>
+					</archive>
 				</configuration>
 			</plugin>
 		</plugins>
-	</build>
 
+		<finalName>${project.artifactId}</finalName>
+	</build>
 </project>
