@@ -29,6 +29,7 @@ public class EndUserDTO {
     private List<RessidentialAddressDTO> residentialAddress;
     private List<UserParameterDetailsDTO> userParameterDetails;
     private Set<Role> roles = new HashSet<>();
+//    private CartDto userCart;
 
     public ErrorStatusDetails validateEndUserRequest(EndUserDTO endUserDTO, String operation) {
         // Validate username

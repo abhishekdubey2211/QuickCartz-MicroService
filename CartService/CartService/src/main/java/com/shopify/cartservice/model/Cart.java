@@ -38,7 +38,7 @@ public class Cart {
     private double totalamount;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart", orphanRemoval = true)
-    @NotEmpty(message = "Cart must have at least one item")
+//    @NotEmpty(message = "Cart must have at least one item")
     private List<CartItem> cartitem;
 
     @Column(name = "userid")

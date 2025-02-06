@@ -14,6 +14,7 @@ import com.shopify.userservice.dto.ErrorStatusDetails;
 import com.shopify.userservice.mapper.Mapper;
 import com.shopify.userservice.model.EndUser;
 import com.shopify.userservice.model.UserParameterDetails;
+import com.shopify.userservice.proxy.CartProxy;
 import com.shopify.userservice.repository.EndUserRepository;
 import com.shopify.userservice.service.EndUserService;
 
@@ -25,6 +26,9 @@ public class EndUserImplementation implements EndUserService {
 	private Mapper mapper = new Mapper();
 	private EndUserRepository endUserRepository;
 
+	@Autowired
+	CartProxy cartProxy;
+	
 	@Autowired
 	public EndUserImplementation(EndUserRepository endUserRepository) {
 		super();
@@ -63,8 +67,11 @@ public class EndUserImplementation implements EndUserService {
 		List<UserParameterDetails> userDetails = new ArrayList<>(endUser.getUserParameterDetails());
 		userDetails.add(new UserParameterDetails(101, 1, UUID.randomUUID().toString(), "User Unique Id", endUser));
 		endUser.setUserParameterDetails(userDetails);
+		
 		// Save and return DTO
-		return mapper.convertToUserDTO(endUserRepository.save(endUser));
+		EndUserDTO dto= mapper.convertToUserDTO(endUserRepository.save(endUser));
+		cartProxy.createCartForUser(dto.getUserId());
+		return dto;
 	}
 
 	@Override

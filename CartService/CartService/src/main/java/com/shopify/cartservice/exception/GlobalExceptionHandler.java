@@ -1,5 +1,6 @@
 package com.shopify.cartservice.exception;
 
+import com.shopify.cartservice.interceptors.LoggingInterceptor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,6 @@ import java.util.Map;
 import java.util.Set;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.shopify.cartserviceinterceptors.LoggingInterceptor;
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {

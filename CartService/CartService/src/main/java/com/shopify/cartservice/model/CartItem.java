@@ -40,7 +40,7 @@ public class CartItem {
     @Column(name = "product_id")
     @NotNull(message = "Product ID cannot be null")
     @Min(value = 1, message = "Product ID must be greater than zero")
-    private long product;
+    private long productid;
 
     @Column(name = "quantity")
     @Min(value = 1, message = "Quantity must be at least 1")

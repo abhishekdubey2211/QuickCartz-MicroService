@@ -1,4 +1,4 @@
-package com.shopify.cartserviceinterceptors;
+package com.shopify.cartservice.interceptors;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
