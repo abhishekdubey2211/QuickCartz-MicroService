@@ -1,0 +1,10 @@
+
+select * from org_1_457.customer_unified_history_3337 where customer_code = 26204 ;
+
+Response:-->
+mediaid
+sessioncallistid
+systemcallid
+callstarttime
+uniquesessiontime
+

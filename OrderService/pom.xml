@@ -7,6 +7,7 @@
 		<artifactId>shopify-parent</artifactId>
 		<version>1.0.0</version>
 	</parent>
+	    <groupId>com.shopify</groupId>
 	<artifactId>OrderService</artifactId>
 	<version>0.0.1</version>
 	<name>OrderService</name>

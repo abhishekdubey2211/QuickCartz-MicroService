@@ -31,7 +31,17 @@
         <project.version>${project.version}</project.version>
         <spring-cloud.version>2024.0.0</spring-cloud.version>
     </properties>
-
+    <modules>
+<!--        <module>ServiceRegistry</module>-->
+<!--        <module>Configuration-Server</module>-->
+        <module>Redis-Utility</module>
+        <module>API-Gateway</module>
+        <module>UserService</module>
+        <module>ProductService</module>
+        <module>CartService</module>
+        <module>OrderService</module>
+        <module>LoginService</module>
+    </modules>
     <!-- Dependencies -->
     <dependencies>
         <!-- JSON Processing -->
@@ -117,6 +127,7 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.7.0</version>
         </dependency>
+
     </dependencies>
 
     <!-- Dependency Management -->

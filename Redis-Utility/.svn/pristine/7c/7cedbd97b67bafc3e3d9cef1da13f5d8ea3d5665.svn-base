@@ -1,0 +1,101 @@
+package com.service.Redis.connection;
+
+import static com.service.Redis.constants.ConstantData.strRedisVersion;
+import com.service.Security.encode_decode.SecurityHandle;
+import static com.service.database.constants.ConstantData.REDISTYPEID;
+import com.service.database.model.ConnectionProperty;
+import com.service.database.serverHandler.ServerHandler;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.connection.RedisSentinelConfiguration;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisSentinelPool;
+
+/**
+ *
+ * @author ravi.j
+ */
+public class RedisConn {
+
+    // Logger
+    private static final Logger log = LoggerFactory.getLogger(RedisConn.class);
+
+    public static JedisSentinelPool objSentPool;
+
+    public void initilizeRedis() throws SQLException, IOException, FileNotFoundException, ClassNotFoundException {
+
+        log.info("******* Inside initializeRedis*******"  + strRedisVersion);
+        // ConnectionProperty
+        ConnectionProperty connectionProperty = new ConnectionProperty();
+
+        String ipAddress = "";
+        String password = "", decryptedpassword = "";
+        int portNo = 0;
+
+//        JedisConnectionFactory connectionFactory = null;
+        RedisSentinelConfiguration sentinelConfig = null;
+        SecurityHandle securityHandle = new SecurityHandle();
+        ServerHandler serverHandler = new ServerHandler();
+
+        try {
+            
+
+            connectionProperty = serverHandler.getConnectionProperty(REDISTYPEID);
+
+            ipAddress = connectionProperty.getIpaddress();
+
+            portNo = connectionProperty.getPortno();
+
+//            log.info("host from query " + ipAddress + " >> " + portNo
+//                    + "login name >" + connectionProperty.getLoginname());
+            sentinelConfig = new RedisSentinelConfiguration().master(connectionProperty.getLoginname()).sentinel(ipAddress, portNo)
+                    .sentinel(ipAddress, portNo);
+
+            final Set<String> sentinels = new HashSet<>();
+
+            sentinels.add(ipAddress + ":" + portNo);
+
+            password = connectionProperty.getPassword();
+
+            //log.info("encrypted password  :: " + password);
+            decryptedpassword = securityHandle.decrypt(password);
+
+            //log.info("decrypted password  :: " + decryptedpassword);
+            objSentPool = new JedisSentinelPool(connectionProperty.getLoginname(), sentinels, decryptedpassword);
+             log.info("RedisConn:: initializeRedis completed ");
+//        } catch (Exception e) {
+//
+//            log.error("SOME EXCEPTION In RedisConn::initializeRedis >> " + e);
+//
+//        }
+        }finally {
+
+            ipAddress = null;
+            password = null;
+            decryptedpassword = null;
+
+        }
+
+    }
+
+   
+
+    public Jedis getRedisConn() throws SQLException, IOException, FileNotFoundException, ClassNotFoundException {
+       if (objSentPool == null) {
+            initilizeRedis();
+        }
+        return objSentPool.getResource();
+
+    }
+
+    
+    public static String getRedisHandlerVersion() {
+        return "Redis Handler v2.0.2 7 Nov 2022";
+    }
+}

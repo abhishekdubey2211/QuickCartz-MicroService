@@ -1,0 +1,7 @@
+package com.service.Redis.constants;
+
+public interface ConstantData {
+
+    String strRedisVersion = "Redis Handler v2.0.0 7th Nov 2022";
+
+}

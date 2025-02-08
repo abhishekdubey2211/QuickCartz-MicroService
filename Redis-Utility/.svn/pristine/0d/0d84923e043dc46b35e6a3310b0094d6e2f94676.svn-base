@@ -1,0 +1,128 @@
+package com.service.Redis.connection;
+
+import com.service.Security.encode_decode.SecurityHandle;
+import static com.service.database.constants.ConstantData.REDISTYPEID;
+import com.service.database.model.ConnectionProperty;
+import com.service.database.model.ServerParameterdetails;
+import com.service.database.serverHandler.ServerHandler;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import javax.net.ssl.SSLParameters;
+import javax.net.ssl.SSLSocketFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.JedisSentinelPool;
+import com.service.Redis.constants.ConstantData;
+import static org.springframework.data.redis.serializer.RedisSerializationContext.java;
+/**
+ *
+ * @author ravi.j
+ */
+public class RedisConn {
+
+    private static final Logger log = LoggerFactory.getLogger(RedisConn.class);
+    public static JedisSentinelPool objSentPool;
+    public static JedisPool objSinglePool;
+    private static int nType = 0;
+
+
+    public void initilizeRedis() throws SQLException, IOException, FileNotFoundException, ClassNotFoundException {
+        log.info("******* Inside initializeRedis*******" + ConstantData.strRedisVersion);
+
+        ConnectionProperty connectionProperty = new ConnectionProperty();
+        String ipAddress = "";
+        String password = "", decryptedpassword = "";
+        int portNo = 0;
+        SecurityHandle securityHandle = new SecurityHandle();
+        ServerHandler serverHandler = new ServerHandler();
+        List<ServerParameterdetails> serverParameterdetailsList = new ArrayList<>();
+
+        try {
+            final Set<String> sentinels = new HashSet<>();
+            connectionProperty = serverHandler.getConnectionProperty(REDISTYPEID);
+            serverParameterdetailsList = connectionProperty.getServerparameterdetails();
+            String strType = serverHandler.getParameterValue(serverParameterdetailsList, 1, 1);
+
+            nType = Integer.parseInt(strType);
+            log.info("Redis Connection Type :: " + nType);
+
+            ipAddress = connectionProperty.getIpaddress();
+            portNo = connectionProperty.getPortno();
+
+            JedisPoolConfig objConfig = new JedisPoolConfig();
+            
+            objConfig.setMaxTotal(100);
+            objConfig.setMaxIdle(40);
+            objConfig.setMinIdle(5);
+            objConfig.setTestOnBorrow(true);
+            objConfig.setTestOnCreate(true);
+            objConfig.setTestOnReturn(true);
+            // objConfig.setMinEvictableIdleTimeMillis(60000);
+            // objConfig.setTimeBetweenEvictionRunsMillis(30000);
+            objConfig.setNumTestsPerEvictionRun(-1);
+            objConfig.setMaxWaitMillis(2000);
+            int ntimeout = 2000;
+
+            password = connectionProperty.getPassword();
+            decryptedpassword = securityHandle.decrypt(password);
+
+            switch (nType) {
+                case ConstantData.TYPE_SENTINAL:
+                    sentinels.add(ipAddress + ":" + portNo);
+                    objSentPool = new JedisSentinelPool(connectionProperty.getLoginname(), sentinels, decryptedpassword, decryptedpassword);
+                    log.info("RedisConn:: initializeRedis with sentinels completed ");
+                    break;
+                case ConstantData.TYPE_SINGLE:
+                    objSinglePool = new JedisPool(objConfig, ipAddress, portNo, ntimeout, decryptedpassword);
+                    log.info("RedisConn:: initializeRedis without sentinels completed ");
+                    break;
+                case ConstantData.TYPE_SINGLE_SECURE:
+                    SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+                    SSLParameters sslParameters = new SSLParameters();
+                    sslParameters.setEndpointIdentificationAlgorithm("HTTPS");
+                    log.debug("SSL Parameters configured for secure connection");
+                    
+                    objSinglePool = new JedisPool(objConfig, ipAddress, portNo, ntimeout, decryptedpassword, true);
+                    log.info("RedisConn:: initializeRedis with secure connection completed ");
+                    break;
+                default:
+                    break;
+            }
+            Jedis objjedis = getRedisConn();
+            log.info("Redis connection isAlive :: " + objjedis.ping());
+        } finally {
+            ipAddress = null;
+            password = null;
+            decryptedpassword = null;
+        }
+    }
+
+    public Jedis getRedisConn() throws SQLException, IOException, FileNotFoundException, ClassNotFoundException {
+        log.info("version : " + getRedisHandlerVersion() + "   Connection Type  :: " + nType);
+        if (nType == ConstantData.TYPE_SENTINAL || nType == ConstantData.TYPE_SENTINAL_SECURE) {
+            if (objSentPool == null) {
+                initilizeRedis();
+            }
+            return objSentPool.getResource();
+
+        } else if (nType == ConstantData.TYPE_SINGLE || nType == ConstantData.TYPE_SINGLE_SECURE) {
+            if (objSinglePool == null) {
+                initilizeRedis();
+            }
+            return objSinglePool.getResource();
+        }
+        return null;
+    }
+
+    public static String getRedisHandlerVersion() {
+        return "Redis Handler v2.0.3  31 December 2024";
+    }
+}

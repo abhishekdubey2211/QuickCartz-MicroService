@@ -1,0 +1,275 @@
+package com.service.Redis.methods;
+
+import com.service.Redis.connection.RedisConn;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import redis.clients.jedis.Jedis;
+
+/**
+ *
+ * @author ravi.j
+ */
+public class RedisMethods {
+
+    // Logger
+    private static final Logger log = LoggerFactory.getLogger(RedisMethods.class);
+
+    // Redis Common Methods
+    public static String getRedisData(String REDIS_KEY) throws SQLException, IOException, FileNotFoundException, ClassNotFoundException {
+
+        // Jedis
+        Jedis jedis = null;
+
+        // RedisConn
+        RedisConn redisConn = new RedisConn();
+
+        String cacheData = null;
+
+        try {
+
+            jedis = redisConn.getRedisConn();
+            if (jedis == null) {
+                log.error("getRedisData :: Connection not get ");
+                return null;
+            }
+
+            cacheData = jedis.get(REDIS_KEY);
+
+            // log.info(REDIS_KEY + " >>" + cacheData);
+            jedis.close();
+            return cacheData;
+
+//        } catch (Exception e) {
+//
+////            log.error("SOME EXCEPTION IN getRedisData >> " + e);
+//
+//        }
+        } finally {
+
+            cacheData = null;
+            jedis = null;
+
+        }
+
+        //  return cacheData;
+    }
+
+    public static void setRedisData(String REDIS_KEY, String json) {
+
+        // Jedis
+        Jedis jedis = null;
+
+        // RedisConn
+        RedisConn redisConn = new RedisConn();
+
+        try {
+
+            jedis = redisConn.getRedisConn();
+            if (jedis == null) {
+                log.error("setRedisData :: Connection not get ");
+            }
+
+            jedis.set(REDIS_KEY, json);
+
+            jedis.close();
+
+        } catch (Exception e) {
+
+//            log.error("SOME EXCEPTION IN setRedisData >> " + e);
+        } finally {
+
+            jedis = null;
+
+        }
+
+    }
+
+    public static void delRedisData(String REDIS_KEY) throws SQLException, IOException, FileNotFoundException, ClassNotFoundException {
+
+        // Jedis
+        Jedis jedis = null;
+
+        // RedisConn
+        RedisConn redisConn = new RedisConn();
+
+        try {
+
+            jedis = redisConn.getRedisConn();
+            if (jedis == null) {
+                log.error("delRedisData :: Connection not get ");
+
+            }
+
+            jedis.del(REDIS_KEY);
+
+            jedis.close();
+
+//        } catch (Exception e) {
+//
+//            log.error("SOME EXCEPTION IN delRedisData >> " + e);
+//
+//        }
+        } finally {
+
+            jedis = null;
+
+        }
+
+    }
+
+    public String GetMemoryValue(String REDIS_KEY, String strKey) throws SQLException, IOException, FileNotFoundException, ClassNotFoundException {
+
+        // RedisConn Class
+        RedisConn redisConn = new RedisConn();
+
+        // Jedis
+        Jedis jedis = null;
+
+        String strValue = null;
+
+        try {
+
+            jedis = redisConn.getRedisConn();
+            if (jedis == null) {
+                log.error("GetMemoryValue :: Connection not get ");
+                return null;
+            }
+
+            strValue = jedis.hget(REDIS_KEY, strKey);
+
+            log.info("GetMemoryValue  >>" + strValue);
+
+            jedis.close();
+
+            return strValue;
+
+//        } catch (Exception e) {
+//
+//            log.error("Some Exception in GetMemoryValue ---> " + e);
+//
+//        }
+        } finally {
+
+            jedis = null;
+            strValue = null;
+
+        }
+
+        // return strValue;
+    }
+
+    public static void SetMemoryValue(String strKey, String strField, String strValue) throws SQLException, IOException, FileNotFoundException, ClassNotFoundException {
+
+        // RedisConn Class
+        RedisConn redisConn = new RedisConn();
+
+        // Jedis
+        Jedis jedis = null;
+
+        try {
+
+            jedis = redisConn.getRedisConn();
+            if (jedis == null) {
+                log.error("SetMemoryValue :: Connection not get ");
+
+            }
+
+            jedis.hset(strKey, strField, strValue);
+            log.info("RedisMethods SetMemoryValue  ");
+            jedis.close();
+
+//        } catch (Exception e) {
+//
+//            log.error("Some Exception in SetMemoryValue ---> " + e);
+//
+//        }
+        } finally {
+
+            jedis = null;
+            strValue = null;
+
+        }
+
+    }
+
+    public static Map<String, String> getRedisHData(String REDIS_KEY) throws SQLException, IOException, FileNotFoundException, ClassNotFoundException {
+
+        // Jedis
+        Jedis jedis = null;
+
+        // RedisConn
+        RedisConn redisConn = new RedisConn();
+
+        Map<String, String> cacheData = null;
+
+        try {
+
+            jedis = redisConn.getRedisConn();
+            if (jedis == null) {
+                log.error("getRedisHData :: Connection not get ");
+                return null;
+            }
+
+            cacheData = jedis.hgetAll(REDIS_KEY);
+
+            jedis.close();
+
+            return cacheData;
+
+//        } catch (Exception e) {
+//
+//            log.error("SOME EXCEPTION IN getRedisHData >> " + e);
+//
+//        }
+        } finally {
+
+            cacheData = null;
+            jedis = null;
+
+        }
+
+        // return cacheData;
+    }
+
+    public static boolean isMemoryFieldExists(String REDIS_KEY) throws SQLException, IOException, FileNotFoundException, ClassNotFoundException {
+
+        Jedis jedis = null;
+
+        //RedisConn
+        RedisConn redisConn = new RedisConn();
+
+        boolean check = false;
+
+        try {
+
+            jedis = redisConn.getRedisConn();
+            if (jedis == null) {
+                log.error("isMemoryFieldExists :: Connection not get ");
+
+            }
+
+            check = jedis.exists(REDIS_KEY);
+
+            jedis.close();
+
+            return check;
+
+//        } catch (Exception e) {
+//
+//            log.error("SOME EXCEPTION IN isMemoryFieldExists >> " + e);
+//
+//        } 
+        } finally {
+
+            jedis = null;
+
+        }
+
+        // return check;
+    }
+   
+}
