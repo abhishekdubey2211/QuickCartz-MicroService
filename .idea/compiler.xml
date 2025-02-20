@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="API-Gateway" />
         <module name="UserService" />
         <module name="ProductService" />
         <module name="CartService" />
@@ -16,18 +17,9 @@
         <module name="LoginService" />
         <module name="Redis-Utility" />
       </profile>
-      <profile name="Annotation profile for Shopify Parent" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
-        <module name="API-Gateway" />
-      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="API-Gateway" target="19" />
+      <module name="API-Gateway" target="17" />
       <module name="CartService" target="19" />
       <module name="Configuration-Server" target="19" />
       <module name="LoginService" target="19" />
