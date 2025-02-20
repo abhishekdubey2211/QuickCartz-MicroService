@@ -1,9 +1,17 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.shopify.service.redis.model;
 
+/**
+ *
+ * @author avhan
+ */
 public class ServerDetails {
 
     private long serverId;
-    private int serverName;
+    private String serverName;
     private String ipAddress;
     private int portno;
     private String loginName;
@@ -20,11 +28,11 @@ public class ServerDetails {
         this.serverId = serverId;
     }
 
-    public int getServerName() {
+    public String getServerName() {
         return serverName;
     }
 
-    public void setServerName(int serverName) {
+    public void setServerName(String serverName) {
         this.serverName = serverName;
     }
 
@@ -83,7 +91,15 @@ public class ServerDetails {
     public void setActive(int active) {
         this.active = active;
     }
-    
-    
-    
+
+    public ServerDetails(int connectiontype, String serverName, String ipAddress, int portno, String password) {
+        this.connectiontype = connectiontype;
+        this.serverName = serverName;
+        this.ipAddress = ipAddress;
+        this.portno = portno;
+        this.loginName = loginName;
+        this.password = password;
+        this.isdelete = 0;
+        this.active = 1;
+    }
 }

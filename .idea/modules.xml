@@ -4,13 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/API-Gateway/API-Gateway.iml" filepath="$PROJECT_DIR$/API-Gateway/API-Gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/CartService/CartService.iml" filepath="$PROJECT_DIR$/CartService/CartService.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Configuration-Server/Configuration-Server.iml" filepath="$PROJECT_DIR$/Configuration-Server/Configuration-Server.iml" />
       <module fileurl="file://$PROJECT_DIR$/LoginService/LoginService.iml" filepath="$PROJECT_DIR$/LoginService/LoginService.iml" />
       <module fileurl="file://$PROJECT_DIR$/OrderService/OrderService.iml" filepath="$PROJECT_DIR$/OrderService/OrderService.iml" />
       <module fileurl="file://$PROJECT_DIR$/ProductService/ProductService.iml" filepath="$PROJECT_DIR$/ProductService/ProductService.iml" />
       <module fileurl="file://$PROJECT_DIR$/QuickCartz-MicroService.iml" filepath="$PROJECT_DIR$/QuickCartz-MicroService.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Redis-Utility/Redis-Utility.iml" filepath="$PROJECT_DIR$/Redis-Utility/Redis-Utility.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ServiceRegistry/ServiceRegistry.iml" filepath="$PROJECT_DIR$/ServiceRegistry/ServiceRegistry.iml" />
       <module fileurl="file://$PROJECT_DIR$/UserService/UserService.iml" filepath="$PROJECT_DIR$/UserService/UserService.iml" />
     </modules>
   </component>

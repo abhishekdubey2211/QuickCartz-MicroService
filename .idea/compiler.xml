@@ -11,11 +11,8 @@
         <module name="UserService" />
         <module name="ProductService" />
         <module name="CartService" />
-        <module name="ServiceRegistry" />
         <module name="OrderService" />
-        <module name="Configuration-Server" />
         <module name="LoginService" />
-        <module name="Redis-Utility" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
